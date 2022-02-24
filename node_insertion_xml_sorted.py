@@ -9,15 +9,6 @@ from itertools import permutations
 import time
 import matplotlib.pyplot as plt
 
-def circular_perms(my_list):
-    """
-    function to generate cyclic permutation from a list
-
-    Accept a list as argument, generate a list of list that describes 
-    [0,1,2,3]" => [[0, 1, 2, 3], [0, 1, 3, 2], [0, 2, 1, 3], [0, 2, 3, 1], [0, 3, 1, 2], [0, 3, 2, 1]]
-    """
-    return [my_list[:1]+list(perm) for perm in permutations(my_list[1:])]
-
 def main():
     # set debug = True to print a bunch of detailed information
     debug = False

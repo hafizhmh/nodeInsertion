@@ -16,11 +16,6 @@ def main():
     # filename = 'ATTWorldNet_N90_E274.n2p'
     filename = '20 node.n2p'
 
-    # function to generate cyclic permutation, e.g.
-    # "[0,1,2,3]" => [[0, 1, 2, 3], [0, 1, 3, 2], [0, 2, 1, 3], [0, 2, 3, 1], [0, 3, 1, 2], [0, 3, 2, 1]]
-    def circular_perms(my_list):
-        return [my_list[:1]+list(perm) for perm in permutations(my_list[1:])]
-
     # open the n2p file that contains geographical locations
     with open(filename) as xml_file:
         data_dict = xmltodict.parse(xml_file.read())
