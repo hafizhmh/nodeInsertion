@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<network description="" name="" version="3">
+	<node id="0" xCoord="346.57476806640625" yCoord="-101.77242279052734" name="Node 0"/>
+	<node id="1" xCoord="231.10728454589844" yCoord="-160.36785888671875" name="Node 1"/>
+	<node id="2" xCoord="504.26544189453125" yCoord="-50.93225860595703" name="Node 2"/>
+	<node id="3" xCoord="646.445556640625" yCoord="-349.07965087890625" name="Node 3"/>
+	<node id="4" xCoord="549.9354248046875" yCoord="-143.99560546875" name="Node 4"/>
+	<node id="5" xCoord="125.11846923828125" yCoord="-348.21795654296875" name="Node 5"/>
+	<node id="6" xCoord="216.4584197998047" yCoord="-286.17572021484375" name="Node 6"/>
+	<node id="7" xCoord="172.5118408203125" yCoord="-359.4200134277344" name="Node 7"/>
+	<node id="8" xCoord="430.159423828125" yCoord="-348.21795654296875" name="Node 8"/>
+	<node id="9" xCoord="395.6915283203125" yCoord="-228.4419708251953" name="Node 9"/>
+	<node id="10" xCoord="129.4879608154297" yCoord="-268.7819519042969" name="Node 10"/>
+	<node id="11" xCoord="87.39588165283203" yCoord="-36.807777404785156" name="Node 11"/>
+	<node id="12" xCoord="676.6851196289062" yCoord="-233.23753356933594" name="Node 12"/>
+	<node id="13" xCoord="711.294189453125" yCoord="-75.1583480834961" name="Node 13"/>
+	<node id="14" xCoord="249.21658325195312" yCoord="-19.035560607910156" name="Node 14"/>
+	<layer id="0" name="" description="" linkCapacityUnitsName="" demandTrafficUnitsName="">
+		<sourceRouting/>
+	</layer>
+</network>

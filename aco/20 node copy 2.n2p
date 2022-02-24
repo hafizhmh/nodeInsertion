@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<network description="" name="" version="3">
+	<node id="0" xCoord="346.57476806640625" yCoord="-101.77242279052734" name="Node 0"/>
+	<node id="1" xCoord="231.10728454589844" yCoord="-160.36785888671875" name="Node 1"/>
+	<layer id="0" name="" description="" linkCapacityUnitsName="" demandTrafficUnitsName="">
+		<sourceRouting/>
+	</layer>
+</network>

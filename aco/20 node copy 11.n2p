@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<network description="" name="" version="3">
+	<node id="0" xCoord="346.57476806640625" yCoord="-101.77242279052734" name="Node 0"/>
+	<node id="1" xCoord="231.10728454589844" yCoord="-160.36785888671875" name="Node 1"/>
+	<node id="2" xCoord="504.26544189453125" yCoord="-50.93225860595703" name="Node 2"/>
+	<node id="3" xCoord="646.445556640625" yCoord="-349.07965087890625" name="Node 3"/>
+	<node id="4" xCoord="549.9354248046875" yCoord="-143.99560546875" name="Node 4"/>
+	<node id="5" xCoord="79.9758529663086" yCoord="-228.22694396972656" name="Node 5"/>
+	<node id="6" xCoord="62.871726989746094" yCoord="-403.54425048828125" name="Node 6"/>
+	<node id="7" xCoord="190.0836639404297" yCoord="-305.1955261230469" name="Node 7"/>
+	<node id="8" xCoord="430.159423828125" yCoord="-348.21795654296875" name="Node 8"/>
+	<node id="9" xCoord="395.6915283203125" yCoord="-228.4419708251953" name="Node 9"/>
+	<node id="10" xCoord="565.243408203125" yCoord="-250.04148864746094" name="Node 10"/>
+	<layer id="0" name="" description="" linkCapacityUnitsName="" demandTrafficUnitsName="">
+		<sourceRouting/>
+	</layer>
+</network>
