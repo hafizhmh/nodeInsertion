@@ -9,41 +9,54 @@ from itertools import permutations
 import time
 import matplotlib.pyplot as plt
 
-def main():
-    # set debug = True to print a bunch of detailed information
-    debug = False
-    # choose the file to be read here
-    # filename = 'ATTWorldNet_N90_E274.n2p'
-    filename = '200 node.n2p'
+def n2p_to_json(filename):
+    """
+    Convert n2p file (xml) to json data
 
-    # open the n2p file that contains geographical locations
+    Also creating json dump file
+    """
     with open(filename) as xml_file:
-        data_dict = xmltodict.parse(xml_file.read())
+        n2p_dict = xmltodict.parse(xml_file.read())
     xml_file.close()
-    json_data = json.dumps(data_dict)
+    json_data = json.dumps(n2p_dict)
     with open("json_dump.json", "w") as json_file:
             json_file.write(json_data)
     json_file.close()
+    return n2p_dict
 
+def node_extractor(n2p_dict):
+    """
+    Extract node information from n2p json data
+
+    Return a list of dicts, each dict has these keys:
+    @id, @xCoord, @yCoord, @name
+    """
     try:
-        nodes = data_dict["network"]["node"]
+        nodes = n2p_dict["network"]["node"]
     except KeyError as e:
         try:
-            nodes = data_dict["network"]["physicalTopology"]["node"]
+            nodes = n2p_dict["network"]["physicalTopology"]["node"]
         except Exception as e:
             print(e)
+    return nodes
 
-    costs = numpy.empty([len(nodes), len(nodes)]) # prepare for the costs matrix with empty array
-
-    #################### exp
+def calc_centroid(nodes_list):
+    """
+    Return tuple (x, y) as average coordinate from the list of nodes
+    """
     x_sum = 0
     y_sum = 0
-    for node in nodes:
+    for node in nodes_list:
         y_sum += float(node["@xCoord"])
         x_sum += float(node["@yCoord"])
-    center = (x_sum/len(nodes),y_sum/len(nodes))
-    print(center)
+    return (x_sum/len(nodes_list),y_sum/len(nodes_list))
 
+def distance_sorter(nodes, center):
+    """
+    Sort nodes according to its distance to the center
+
+    Return list string
+    """
     node_distance = []
     for node in nodes:
         print(node) if debug else None
@@ -52,11 +65,13 @@ def main():
         y = float(node["@yCoord"])
         dis = sqrt((x-center[0])**2 +(y-center[1])**2)
         node_distance.append((node["@id"], dis))
-    print(node_distance)
     node_distance.sort(key=lambda x:x[1],reverse = True)
-    print(node_distance)
+    sorted_node =  [node for (node,distance) in node_distance]
+    return sorted_node
 
-    # calculate distance between every two nodes, so #nodes**2 calculation
+def gen_cost_matrix(nodes):
+    # prepare for the costs matrix with empty array.
+    costs = numpy.empty([len(nodes), len(nodes)])
     i = 0
     for node1 in nodes:
         j = 0
@@ -70,8 +85,33 @@ def main():
             costs[i][j] = dis
             j+=1
         i+=1
+    return costs
+
+def main():
+    # set debug = True to print a bunch of detailed information
+    global debug
+    debug = False
+    # choose the file to be read here
+    # filename = 'ATTWorldNet_N90_E274.n2p'
+    filename = '200 node.n2p'
+
+    # open the n2p file that contains geographical locations
+    n2p_dict = n2p_to_json(filename=filename)
+
+    # extract only the relevant info
+    nodes = node_extractor(n2p_dict=n2p_dict)
+
+    # calculate center of the nodes
+    center = calc_centroid(nodes_list=nodes)
+
+    # calculate distance for each edges
+    sorted_node = distance_sorter(nodes=nodes, center=center)
+
+    # calculate distance between every two nodes, so #nodes**2 calculation.
+    costs_matrix = gen_cost_matrix(nodes=nodes)
+
     # print the costs matrix
-    df = pandas.DataFrame(costs, columns=[x for x in range(0,len(nodes))])
+    df = pandas.DataFrame(costs_matrix, columns=[x for x in range(0,len(nodes))])
     df_rounded = df.round(decimals=3)
     print("Costs matrix (Euclidian distance):\n", df_rounded,"\n")
     print("--------------------------")
@@ -82,7 +122,7 @@ def main():
     z = []
     max_size = len(df)
     start_time = time.time()
-    for i, (new_node,_) in enumerate(node_distance):
+    for i, (new_node) in enumerate(sorted_node):
         size = i+1
         x.append(size)
         if size==1:
@@ -171,3 +211,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+# function (size, list nodes, cost matrix)
+# return cost, ring
